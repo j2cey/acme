@@ -23,3 +23,8 @@ php-cs-fixer fix PageController.php --level=psr2
 
 --- Install TWIG
 composer require "twig/twig:~1.0"
+
+--- Installing GIT
+# after creating the .gitignore folder
+git add .
+git commit -m "Initial commit"
