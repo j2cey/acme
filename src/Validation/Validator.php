@@ -1,61 +1,51 @@
 <?php namespace Acme\Validation;
 
 use Respect\Validation\Validator as Valid;
-/**
- *
- */
+
+
 class Validator
 {
-
-  function __construct()
-  {
-  }
-
   public function isValid($validation_data){
+
 
     $errors = [];
 
     foreach ($validation_data as $name => $value) {
-      if (isset($_REQUEST[$name])){
 
-        $rules = explode('|',$value);
+      $rules = explode('|',$value);
 
-        foreach ($rules as $rule) {
+      foreach ($rules as $rule) {
 
-          $exploded = explode(":", $rule);
+        $exploded = explode(":", $rule);
 
-          switch ($exploded[0]) {
-            case 'min':
-              $min = $exploded[1];
-              if (Valid::stringType()->length($min)->Validate($_REQUEST[$name]) == false) {
-                $errors[] = $name . " must be at least " . $min . " characters long!";
+        switch ($exploded[0]) {
+          case 'min':
+            $min = $exploded[1];
+            if (Valid::stringType()->length($min)->Validate($_REQUEST[$name]) == false) {
+              $errors[] = $name . " must be at least " . $min . " characters long!";
+            }
+            break;
+
+          case 'email':
+            if (Valid::email()->validate($_REQUEST[$name]) == false) {
+              $errors[] = $name . " must be a valid email address!";
+            }
+            break;
+
+          case 'equalTo':
+            $secondName = $exploded[1];
+            if (isset($_REQUEST[$secondName])){
+              if (Valid::equals($_REQUEST[$name])->validate($_REQUEST[$secondName]) == false) {
+                $errors[] = $name . " must match " . $secondName . "!";
               }
-              break;
+            }else{
+              $errors[] = "No second value found!";
+            }
+            break;
 
-            case 'email':
-              if (Valid::email()->validate($_REQUEST[$name]) == false) {
-                $errors[] = $name . " must be a valid email address!";
-              }
-              break;
-
-            case 'equalTo':
-              $secondName = $exploded[1];
-              if (isset($_REQUEST[$secondName])){
-                if (Valid::equals($_REQUEST[$name])->validate($_REQUEST[$secondName]) == false) {
-                  $errors[] = $name . " must match " . $secondName . "!";
-                }
-              }else{
-                $errors[] = "No second value found!";
-              }
-              break;
-
-            default:
-              // do nothing
-          }
+          default:
+            $errors[] = "No value found!";
         }
-
-      }else{
-        $errors[] = "No value found!";
       }
     }
     return $errors;
