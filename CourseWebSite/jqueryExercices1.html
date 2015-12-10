@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JQuery Exrecices</title>
+
+  <script src="js/jquery.js"></script>
+  <script src="bootstrap/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+
+  <style>
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h2>JQuery selectors</h2>
+    <hr>
+    <p id="one">I am a paragraph with an ID of "one"</p>
+    <p id="two">I am a paragraph with an ID of "two"</p>
+    <p id="three">I am a paragraph with an ID of "three"</p>
+    <hr>
+    <input type="text" name="selector" id="selector">
+
+    <a class="btn btn-primary btn-sm" href="#" onclick="changeClass($('#selector').val())">
+      Click me to change class
+    </a>
+
+    <a class="btn btn-info btn-sm" href="#" onclick="removeStyles()">
+      Reset all styles
+    </a>
+
+    <br>
+    <br>
+
+    <a class="btn btn-info btn-sm" href="#" onclick="addBorders()">
+      Add Borders
+    </a>
+
+    <a class="btn btn-info btn-sm" href="#" onclick="removeBorders()">
+      Remove Borders
+    </a>
+
+  </div>
+
+
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+  <script type="text/javascript" src="js/jquery-validation-1.14.0/dist/localization/messages_fr.js"></script>
+
+  <script>
+    function changeClass(x) {
+      $("#" + x).addClass('red');
+    }
+
+    function removeStyles() {
+      $("p").removeClass('red');
+    }
+
+    function addBorders() {
+      $("p").attr('style', 'border: 1px solid red;');
+    }
+
+    function removeBorders() {
+      $("p").removeAttr('style');
+    }
+  </script>
+</body>
+
+</html>
