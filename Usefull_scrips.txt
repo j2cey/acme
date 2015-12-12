@@ -1,30 +1,42 @@
 ---	Install composer
 # From the Project folder
-curl -sS https://getcomposer.org/installer | php
+$ curl -sS https://getcomposer.org/installer | php
 
 # And move it to be available for the entire machine
-sudo mv composer.phar /usr/local/bin/composer
+$ sudo mv composer.phar /usr/local/bin/composer
 
 # Init the composer for a project (from project folder)
-composer init
+$ composer init
 
 # Install/Update requires (from project folder)
-composer update
+$ composer update
 
 --- Fix coding styles standard
 curl http://get.sensiolabs.org/php-cs-fixer.phar -o php-cs-fixer
 # Make the generated file (php-cs-fixer) executable
-sudo chmod a+x php-cs-fixer
+$ sudo chmod a+x php-cs-fixer
 # Then move the file
-sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
+$ sudo mv php-cs-fixer /usr/local/bin/php-cs-fixer
 # So fix the coding style in a php file
 #	Execute (in the file directory)
-php-cs-fixer fix PageController.php --level=psr2
+$ php-cs-fixer fix PageController.php --level=psr2
 
 --- Install TWIG
 composer require "twig/twig:~1.0"
 
 --- Installing GIT
 # after creating the .gitignore folder
-git add .
-git commit -m "Initial commit"
+$ git add .
+$ git commit -m "Initial commit"
+
+
+--- Installing Phinx
+$ composer require robmorgan/phinx
+-- Creating a New Migration
+- 1st install
+$ php vendor/bin/phinx init
+$ php vendor/bin/phinx create CreateUserTable
+--- Run migration (can -e development/production/test or leav blank for default)
+$ php vendor/bin/phinx migrate
+--- Rollback (can -e development/production/test or leav blank for default)
+$ php vendor/bin/phinx rollback
