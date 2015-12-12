@@ -15,7 +15,7 @@ Login page
 
 About page
 	-- some info about the company
-	-- display information from database
+	-- display page from database
 
 Testimonials page
 	-- display customer Testimonials
