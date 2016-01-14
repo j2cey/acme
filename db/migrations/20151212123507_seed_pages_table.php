@@ -10,7 +10,7 @@ class SeedPagesTable extends AbstractMigration
     $this->execute("
       insert into pages (browser_title, page_content)
       values
-      ('First Page Title', 'First Page Content')
+      ('About Acme', 'About text')
     ");
   }
 

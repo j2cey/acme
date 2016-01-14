@@ -43,6 +43,15 @@ class Validator
             }
             break;
 
+          case 'unique':
+            $model = "Acme\\Models\\" . $exploded[1];
+            $table = new $model;
+            $results = $table::where($name, '=', $_REQUEST[$name])->get();
+            foreach ($results as $item ) {
+              $errors[] = $_REQUEST[$name] . " already exists in this system!";
+            }
+            break;
+
           default:
             $errors[] = "No value found!";
         }
